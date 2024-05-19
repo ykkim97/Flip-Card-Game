@@ -24,6 +24,15 @@
     
 }
 
+.menuContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.addWordButton {
+
+}
+
 .CardContainer {
     width: 50%;
     height: 50%;

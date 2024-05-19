@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import styles from "./Popup.module.css";
 import Button from '@mui/material/Button';
 
 const PopupContainer = styled.div`
@@ -24,8 +25,8 @@ const Popup = ({
         <>
             <PopupContainer>
                 <PopupContent>
-                    <h2>Congratulations!!</h2>
-                    <p>You have matched all the cards.</p>
+                    <h2 className={styles.title}>Congratulations!!</h2>
+                    <p className={styles.desc}>You have matched all the cards.</p>
                     <Button variant="contained" color="success" onClick={handleRestart}>Play Again</Button>
                 </PopupContent>
             </PopupContainer>
