@@ -1,10 +1,22 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const bounce = keyframes`
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+`;
 
 const CardContainer = styled.div`
     width: 100px;
     height: 150px;
     perspective: 1000px;
+    &:hover {
+        animation: ${bounce} 0.3s linear;
+    }
 `;
 
 const CardInner = styled.div`
