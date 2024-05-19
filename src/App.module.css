@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: auto;
+    background-color: #f0e5a6;
+    display: flex;
+    justify-content: center;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.title {
+    
+}
+
+.CardContainer {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
