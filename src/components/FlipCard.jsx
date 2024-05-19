@@ -31,8 +31,10 @@ const createShuffledCards = (words) => {
     return allCards;
 };
 
-const FlipCard = () => {
-    const [cards, setCards] = useState([]);
+const FlipCard = ({
+    cards, setCards
+}) => {
+    // const [cards, setCards] = useState([]);
     const [flipped, setFlipped] = useState([]);
     const [matched, setMatched] = useState([]);
     const [gameEnded, setGameEnded] = useState(false);
@@ -51,8 +53,8 @@ const FlipCard = () => {
             .map(flippedId => cards.find(card => card.id === flippedId))
             .find(flippedCard => {
                 const isMeaningMatch = (
-                    (flippedCard.isKorean && clickedCard.isKorean && flippedCard.id.split('_')[0] === clickedCard.id.split('_')[0]) ||
-                    (!flippedCard.isKorean && !clickedCard.isKorean && flippedCard.id.split('_')[0] === clickedCard.id.split('_')[0])
+                    (flippedCard?.isKorean && clickedCard?.isKorean && flippedCard.id.split('_')[0] === clickedCard?.id.split('_')[0]) ||
+                    (!flippedCard?.isKorean && !clickedCard?.isKorean && flippedCard.id.split('_')[0] === clickedCard?.id.split('_')[0])
                 );
                 return isMeaningMatch;
             });

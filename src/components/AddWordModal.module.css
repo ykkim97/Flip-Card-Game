@@ -23,8 +23,20 @@
     justify-content: center;
     flex-direction: column;
     width: 300px;
+    padding: 15px;
 }
 
 .inputField {
     
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.buttonContainer Button {
+    margin: 5px;
 }
