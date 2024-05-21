@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from "./App.module.css";
 import FlipCard from './components/FlipCard'
 import Button from '@mui/material/Button';
 import AddWordModal from './components/AddWordModal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const createShuffledCards = (words) => {
   const englishCards = words.map(word => ({ id: `${word.english}_${word.korean}_en`, text: word.english, isKorean: false }));
@@ -15,6 +17,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  
   const handleModal = () => {
     setShowModal(!showModal);
   }
@@ -32,22 +35,24 @@ function App() {
 
   const handleNewWordChange = (index, key, value) => {
     const updatedNewWords = newWords.map((word, i) => {
-        if (i === index) {
-            return { ...word, [key]: value };
-        }
-        return word;
+      if (i === index) {
+          return { ...word, [key]: value };
+      }
+      return word;
     });
     setNewWords(updatedNewWords);
   };
 
   const handleAddWords = () => {
-      const newWordsToAdd = newWords.filter(word => word.english && word.korean);
-      if (newWordsToAdd.length === 8) {
-          const combinedWords = [...newWordsToAdd];
-          setCards(createShuffledCards(combinedWords));
-      } else {
-          alert("Please fill in all 8 word pairs.");
-      }
+    const newWordsToAdd = newWords.filter(word => word.english && word.korean);
+    if (newWordsToAdd.length === 8) {
+      const combinedWords = [...newWordsToAdd];
+      setCards(createShuffledCards(combinedWords));
+      setShowModal(!showModal)
+      toast("단어가 추가되었습니다.");
+    } else {
+      alert("8세트를 입력해주세요.");
+    }
   };
 
   return (
@@ -70,6 +75,7 @@ function App() {
           <FlipCard cards={cards} setCards={setCards}/>
         </div>
       </div>
+
       {showModal ? (
         <AddWordModal 
           newWords={newWords}
@@ -78,6 +84,8 @@ function App() {
           setShowModal={setShowModal}
         />
       ) : null}
+
+      <ToastContainer />
     </>
   )
 }
