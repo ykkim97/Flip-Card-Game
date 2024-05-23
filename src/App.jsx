@@ -4,7 +4,9 @@ import FlipCard from './components/FlipCard'
 import Button from '@mui/material/Button';
 import AddWordModal from './components/AddWordModal';
 import { ToastContainer, toast } from 'react-toastify';
+import * as XLSX from 'xlsx';
 import 'react-toastify/dist/ReactToastify.css';
+import { Tooltip } from '@mui/material';
 
 // create cards handler
 const createShuffledCards = (words) => {
@@ -105,6 +107,16 @@ function App() {
     }
     toast("Complete!");
   }
+  
+  // handle download Excel file
+  const handleDownloadExcel = () => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = "/format.xlsx";
+    downloadLink.download = "format.xlsx";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
 
   return (
     <>
@@ -113,26 +125,42 @@ function App() {
       </div>
       <div className={styles.menuContainer}>
         {/* Add button */}
-        <Button 
-          className={styles.addWordButton}
-          onClick={handleModal}
-          color='success'
-          variant='contained'
-        >
-          Add
-        </Button>
+        <Tooltip title="새로 단어를 추가해보세요!">
+          <Button 
+            className={styles.addWordButton}
+            onClick={handleModal}
+            color='success'
+            variant='contained'
+          >
+            Add
+          </Button>
+        </Tooltip>
 
         <div className={styles.gap}></div>
 
         {/* Shuffle button */}
-        <Button 
-          className={styles.shuffledCardsButton}
-          onClick={handleShuffle} 
-          color='info'
-          variant='contained'
-        >
-          Shuffle
-        </Button>
+        <Tooltip title="카드를 랜덤하게 섞을 수 있어요!">
+          <Button 
+            className={styles.shuffledCardsButton}
+            onClick={handleShuffle} 
+            color='info'
+            variant='contained'
+          >
+            Shuffle
+          </Button>
+        </Tooltip>
+
+        <div className={styles.gap}></div>
+        <Tooltip title="Excel 양식 다운로드 받기">
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={handleDownloadExcel}
+            
+          >
+            Excel 양식 다운로드
+          </Button>
+        </Tooltip>
       </div>
 
       {/* Cards Component */}
@@ -149,6 +177,8 @@ function App() {
           handleNewWordChange={handleNewWordChange}
           handleAddWords={handleAddWords}
           setShowModal={setShowModal}
+          setCards={setCards}
+          createShuffledCards={createShuffledCards}
         />
       ) : null}
 
