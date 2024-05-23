@@ -34,7 +34,6 @@ const createShuffledCards = (words) => {
 const FlipCard = ({
     cards, setCards
 }) => {
-    // const [cards, setCards] = useState([]);
     const [flipped, setFlipped] = useState([]);
     const [matched, setMatched] = useState([]);
     const [gameEnded, setGameEnded] = useState(false);
@@ -69,8 +68,13 @@ const FlipCard = ({
         setTimeElapsed(0);
         setFlipped([]);
         setMatched([]);
-        const shuffledCards = createShuffledCards(initialWords);
-        setCards(shuffledCards);
+        if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
+            const shuffledCards = createShuffledCards(initialWords);
+            setCards(shuffledCards);
+        } else {
+            const shuffledCards = createShuffledCards(JSON.parse(getWordsFromStorage));
+            setCards(shuffledCards);
+        }
     };
 
     useEffect(() => {

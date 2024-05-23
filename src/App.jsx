@@ -13,11 +13,32 @@ const createShuffledCards = (words) => {
   return allCards;
 };
 
+const initialWords = [
+  { english: 'apple', korean: '사과' },
+  { english: 'banana', korean: '바나나' },
+  { english: 'cat', korean: '고양이' },
+  { english: 'dog', korean: '개' },
+  { english: 'car', korean: '자동차' },
+  { english: 'house', korean: '집' },
+  { english: 'book', korean: '책' },
+  { english: 'tree', korean: '나무' }
+];
+
 function App() {
   const [cards, setCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  
+  useEffect(() => {
+    let getWordsFromStorage = localStorage.getItem('combineWords');
+    if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
+      const shuffledCards = createShuffledCards(initialWords);
+      setCards(shuffledCards);
+    } else {
+      const shuffledCards = createShuffledCards(JSON.parse(getWordsFromStorage));
+      setCards(shuffledCards);
+    }
+  }, [])
+
   const handleModal = () => {
     setShowModal(!showModal);
   }
@@ -45,8 +66,12 @@ function App() {
 
   const handleAddWords = () => {
     const newWordsToAdd = newWords.filter(word => word.english && word.korean);
+
+    console.log(newWordsToAdd, "newWordsToAdd")
+
     if (newWordsToAdd.length === 8) {
       const combinedWords = [...newWordsToAdd];
+      localStorage.setItem('combineWords', JSON.stringify(combinedWords));
       setCards(createShuffledCards(combinedWords));
       setShowModal(!showModal)
       toast("단어가 추가되었습니다.");
