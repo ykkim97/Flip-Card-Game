@@ -61,6 +61,15 @@ function App() {
 
   // formdata change handler
   const handleNewWordChange = (index, key, value) => {
+    if (key === 'english' && /[^a-zA-Z]/.test(value)) {
+      toast("영어단어를 입력해주세요.");
+      return;
+    }
+    if (key === 'korean' && /[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(value)) {
+      toast("한국어를 입력해주세요.");
+      return;
+    }
+
     const updatedNewWords = newWords.map((word, i) => {
       if (i === index) {
         return { ...word, [key]: value };
