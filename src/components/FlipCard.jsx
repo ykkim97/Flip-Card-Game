@@ -68,6 +68,7 @@ const FlipCard = ({
         setTimeElapsed(0);
         setFlipped([]);
         setMatched([]);
+        let getWordsFromStorage = localStorage.getItem('combineWords');
         if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
             const shuffledCards = createShuffledCards(initialWords);
             setCards(shuffledCards);

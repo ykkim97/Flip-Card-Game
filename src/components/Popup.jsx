@@ -26,7 +26,7 @@ const Popup = ({
             <PopupContainer>
                 <PopupContent>
                     <h2 className={styles.title}>Congratulations!!</h2>
-                    <p className={styles.desc}>You have matched all the cards.</p>
+                    <p className={styles.desc}>You have matched all the cards!</p>
                     <Button variant="contained" color="success" onClick={handleRestart}>Play Again</Button>
                 </PopupContent>
             </PopupContainer>

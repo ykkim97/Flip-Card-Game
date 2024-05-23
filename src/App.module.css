@@ -31,7 +31,15 @@
 }
 
 .addWordButton {
-    
+
+}
+
+.gap {
+    width: 10px;
+}
+
+.shuffledCardsButton {
+
 }
 
 .CardContainer {

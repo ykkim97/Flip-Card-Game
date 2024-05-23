@@ -6,13 +6,15 @@ import AddWordModal from './components/AddWordModal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// create cards handler
 const createShuffledCards = (words) => {
-  const englishCards = words.map(word => ({ id: `${word.english}_${word.korean}_en`, text: word.english, isKorean: false }));
-  const koreanCards = words.map(word => ({ id: `${word.korean}_${word.english}_kr`, text: word.korean, isKorean: true }));
-  const allCards = [...englishCards, ...koreanCards].sort(() => 0.5 - Math.random());
+  const englishCards = words.map(word => ({ id: `${word.english}_${word.korean}_en`, text: word.english, isKorean: false })); // english words
+  const koreanCards = words.map(word => ({ id: `${word.korean}_${word.english}_kr`, text: word.korean, isKorean: true })); // korean words
+  const allCards = [...englishCards, ...koreanCards].sort(() => 0.5 - Math.random()); // random position
   return allCards;
 };
 
+// initial words
 const initialWords = [
   { english: 'apple', korean: '사과' },
   { english: 'banana', korean: '바나나' },
@@ -28,6 +30,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  // During initial rendering
   useEffect(() => {
     let getWordsFromStorage = localStorage.getItem('combineWords');
     if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
@@ -39,10 +42,12 @@ function App() {
     }
   }, [])
 
+  // modal click handler
   const handleModal = () => {
     setShowModal(!showModal);
   }
 
+  // words state
   const [newWords, setNewWords] = useState([
     { english: '', korean: '' },
     { english: '', korean: '' },
@@ -54,21 +59,20 @@ function App() {
     { english: '', korean: '' },
   ]);
 
+  // formdata change handler
   const handleNewWordChange = (index, key, value) => {
     const updatedNewWords = newWords.map((word, i) => {
       if (i === index) {
-          return { ...word, [key]: value };
+        return { ...word, [key]: value };
       }
       return word;
     });
     setNewWords(updatedNewWords);
   };
 
+  // add words handler
   const handleAddWords = () => {
     const newWordsToAdd = newWords.filter(word => word.english && word.korean);
-
-    console.log(newWordsToAdd, "newWordsToAdd")
-
     if (newWordsToAdd.length === 8) {
       const combinedWords = [...newWordsToAdd];
       localStorage.setItem('combineWords', JSON.stringify(combinedWords));
@@ -80,27 +84,56 @@ function App() {
     }
   };
 
+  // shuffle cards handler
+  const handleShuffle = () => {
+    let getWordsFromStorage = localStorage.getItem('combineWords');
+    if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
+      const shuffledCards = createShuffledCards(initialWords);
+      setCards(shuffledCards);
+    } else {
+      const shuffledCards = createShuffledCards(JSON.parse(getWordsFromStorage));
+      setCards(shuffledCards);
+    }
+    toast("Complete!");
+  }
+
   return (
     <>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>Flip Word Card!</h1>
       </div>
       <div className={styles.menuContainer}>
+        {/* Add button */}
         <Button 
           className={styles.addWordButton}
           onClick={handleModal}
           color='success'
           variant='contained'
         >
-          단어 등록
+          Add
+        </Button>
+
+        <div className={styles.gap}></div>
+
+        {/* Shuffle button */}
+        <Button 
+          className={styles.shuffledCardsButton}
+          onClick={handleShuffle} 
+          color='info'
+          variant='contained'
+        >
+          Shuffle
         </Button>
       </div>
+
+      {/* Cards Component */}
       <div className={styles.container}>
         <div className={styles.CardContainer}>
           <FlipCard cards={cards} setCards={setCards}/>
         </div>
       </div>
 
+      {/* Modal Component */}
       {showModal ? (
         <AddWordModal 
           newWords={newWords}
@@ -110,6 +143,7 @@ function App() {
         />
       ) : null}
 
+      {/* Toast Message Container */}
       <ToastContainer />
     </>
   )
