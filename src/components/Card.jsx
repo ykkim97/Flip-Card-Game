@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 const bounce = keyframes`
@@ -42,23 +42,15 @@ const CardFace = styled.div`
 
 const CardFront = styled(CardFace)`
     background-color: #ffcc00;
+    font-size: 17px;
     transform: rotateY(180deg);
 `;
 
 const CardBack = styled(CardFace)`
     background-color: #333;
+    font-size: 17px;
     color: white;
 `;
-
-// const CardFront = styled(CardFace)`
-//     background-color: #ffcc00;
-// `;
-
-// const CardBack = styled(CardFace)`
-//     background-color: #333;
-//     color: white;
-//     transform: rotateY(180deg);
-// `;
 
 const Card = ({ card, isFlipped, onClick }) => {
     return (

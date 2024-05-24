@@ -182,6 +182,8 @@ function App() {
         />
       ) : null}
 
+      <div style={{ textAlign: "center", fontSize: '12px', marginTop: '20px' }}>Email | 97ykkim@naver.com</div>
+
       {/* Toast Message Container */}
       <ToastContainer />
     </>

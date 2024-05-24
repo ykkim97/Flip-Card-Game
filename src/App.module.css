@@ -6,8 +6,8 @@
 
 .container {
     width: 100%;
-    height: auto;
-    background-color: #f0e5a6;
+    height: 75dvh;
+    background-color: #e9e9e9;
     display: flex;
     justify-content: center;
 }
