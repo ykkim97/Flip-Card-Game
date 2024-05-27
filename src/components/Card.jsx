@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
 const bounce = keyframes`
@@ -53,6 +53,7 @@ const CardBack = styled(CardFace)`
 `;
 
 const Card = ({ card, isFlipped, onClick }) => {
+
     return (
         <CardContainer onClick={onClick}>
             <CardInner isFlipped={isFlipped}>

@@ -38,9 +38,15 @@
     width: 10px;
 }
 
+/* .HelpIconContainer {
+    width: 30px;
+    margin: 5px 20px 0 20px;
+} */
+
 .shuffledCardsButton {
 
 }
+
 
 .CardContainer {
     width: 50%;
