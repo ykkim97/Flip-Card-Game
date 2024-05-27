@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from '@mui/material';
 import useStore from './store/useStore';
+import { initialWords } from './data/initialWords';
 
 // create cards handler
 const createShuffledCards = (words) => {
@@ -15,18 +16,6 @@ const createShuffledCards = (words) => {
   const allCards = [...englishCards, ...koreanCards].sort(() => 0.5 - Math.random()); // random position
   return allCards;
 };
-
-// initial words
-const initialWords = [
-  { english: 'apple', korean: '사과' },
-  { english: 'banana', korean: '바나나' },
-  { english: 'cat', korean: '고양이' },
-  { english: 'dog', korean: '개' },
-  { english: 'car', korean: '자동차' },
-  { english: 'house', korean: '집' },
-  { english: 'book', korean: '책' },
-  { english: 'tree', korean: '나무' }
-];
 
 function App() {
   const { 

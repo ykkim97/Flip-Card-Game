@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import styled from "styled-components";
 import Popup from "./Popup";
-import useStore from "../store/useStore";
+import useStore, { createShuffledCards } from "../store/useStore";
+import { initialWords } from "../data/initialWords";
 
 const GridContainer = styled.div`
     display: grid;
@@ -14,27 +15,8 @@ const GridContainer = styled.div`
     background-color: #f0f0f0;
 `;
 
-const initialWords = [
-    { english: 'apple', korean: '사과' },
-    { english: 'banana', korean: '바나나' },
-    { english: 'cat', korean: '고양이' },
-    { english: 'dog', korean: '개' },
-    { english: 'car', korean: '자동차' },
-    { english: 'house', korean: '집' },
-    { english: 'book', korean: '책' },
-    { english: 'tree', korean: '나무' }
-];
-
-const createShuffledCards = (words) => {
-    const englishCards = words.map(word => ({ id: `${word.english}_${word.korean}_en`, text: word.english, isKorean: false }));
-    const koreanCards = words.map(word => ({ id: `${word.korean}_${word.english}_kr`, text: word.korean, isKorean: true }));
-    const allCards = [...englishCards, ...koreanCards].sort(() => 0.5 - Math.random());
-    return allCards;
-};
-
 const FlipCard = () => {
     const { cards, setCards } = useStore();
-
     const [flipped, setFlipped] = useState([]);
     const [matched, setMatched] = useState([]);
     const [gameEnded, setGameEnded] = useState(false);
