@@ -17,6 +17,7 @@ const CardContainer = styled.div`
     &:hover {
         animation: ${bounce} 0.3s linear;
     }
+    cursor: pointer;
 `;
 
 const CardInner = styled.div`
@@ -38,6 +39,9 @@ const CardFace = styled.div`
     align-items: center;
     font-size: 24px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35), 
+                0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: background-color 1s ease-in-out;
 `;
 
 const CardFront = styled(CardFace)`
