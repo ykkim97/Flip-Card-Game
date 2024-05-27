@@ -13,6 +13,7 @@ https://flipword-beta.netlify.app/
 1. React 기반 개발
 2. Material UI(MUI), styled-components 등 기타 스타일 관련 라이브러리 사용
 3. react-toastify로 알림창 표시
+4. 상태관리 : useState, zunstand
 
 ## 업데이트 기록
 2024.5.21일 기준으로 현재 미완성된 초기 버전이며 추가 기능개발이 필요함.
