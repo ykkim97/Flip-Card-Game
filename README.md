@@ -28,3 +28,6 @@ https://flipword-beta.netlify.app/
 
 2024.5.27 기록
 - 상태관리 관련 부분 개선 작업 진행 중(useState => zustand)
+
+2024.5.28 개선 기록
+- 상태관리 관련 부분 개선 작업 진행 중(useState => zustand) ==> 1차 완료
