@@ -4,16 +4,19 @@ import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
 import * as XLSX from 'xlsx';
 import { toast } from "react-toastify";
+import useStore, { createShuffledCards } from "../store/useStore";
 
 const AddWordModal = ({
-    setShowModal,
-    newWords,
-    handleNewWordChange,
-    handleAddWords,
-    setCards,
-    createShuffledCards
+    handleNewWordChange
 }) => {
+    const { setCards, setShowModal, newWords, addWords } = useStore();
+
     const fileInputRef = useRef();
+
+    // add words handler
+    const handleAddWords = () => {
+        addWords(newWords);
+    };
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
@@ -42,7 +45,7 @@ const AddWordModal = ({
             localStorage.setItem('combineWords', JSON.stringify(parsedWords));
             const shuffledCards = createShuffledCards(parsedWords);
             setCards(shuffledCards);
-            setShowModal((prev) => !prev);
+            setShowModal(false);
             toast("Complete!");
         };
         reader.readAsArrayBuffer(file);
@@ -90,7 +93,7 @@ const AddWordModal = ({
                 ))}
 
                 <div className={styles.buttonContainer}>
-                    <Button variant="outlined" color="success" onClick={() => setShowModal(prev => !prev)}>닫기</Button>
+                    <Button variant="outlined" color="success" onClick={() => setShowModal(false)}>닫기</Button>
                     <Button variant="contained" color="success" onClick={handleAddWords}>추가</Button>
                     <Button variant="contained" color="info" onClick={triggerFileInput}>Excel</Button>
                 </div>

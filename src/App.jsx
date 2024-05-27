@@ -4,9 +4,9 @@ import FlipCard from './components/FlipCard'
 import Button from '@mui/material/Button';
 import AddWordModal from './components/AddWordModal';
 import { ToastContainer, toast } from 'react-toastify';
-import * as XLSX from 'xlsx';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from '@mui/material';
+import useStore from './store/useStore';
 
 // create cards handler
 const createShuffledCards = (words) => {
@@ -29,37 +29,19 @@ const initialWords = [
 ];
 
 function App() {
-  const [cards, setCards] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const { 
+    cards, setCards, showModal, setShowModal, newWords, setNewWords, loadInitialWords, addWords, shuffleCards
+  } = useStore();
 
   // During initial rendering
   useEffect(() => {
-    let getWordsFromStorage = localStorage.getItem('combineWords');
-    if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
-      const shuffledCards = createShuffledCards(initialWords);
-      setCards(shuffledCards);
-    } else {
-      const shuffledCards = createShuffledCards(JSON.parse(getWordsFromStorage));
-      setCards(shuffledCards);
-    }
-  }, [])
+    loadInitialWords(initialWords);
+  }, [loadInitialWords])
 
   // modal click handler
   const handleModal = () => {
     setShowModal(!showModal);
   }
-
-  // words state
-  const [newWords, setNewWords] = useState([
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-    { english: '', korean: '' },
-  ]);
 
   // formdata change handler
   const handleNewWordChange = (index, key, value) => {
@@ -83,29 +65,12 @@ function App() {
 
   // add words handler
   const handleAddWords = () => {
-    const newWordsToAdd = newWords.filter(word => word.english && word.korean);
-    if (newWordsToAdd.length === 8) {
-      const combinedWords = [...newWordsToAdd];
-      localStorage.setItem('combineWords', JSON.stringify(combinedWords));
-      setCards(createShuffledCards(combinedWords));
-      setShowModal(!showModal)
-      toast("단어가 추가되었습니다.");
-    } else {
-      alert("8세트를 입력해주세요.");
-    }
+    addWords(newWords);
   };
 
   // shuffle cards handler
   const handleShuffle = () => {
-    let getWordsFromStorage = localStorage.getItem('combineWords');
-    if (getWordsFromStorage === null || getWordsFromStorage.length === 0) {
-      const shuffledCards = createShuffledCards(initialWords);
-      setCards(shuffledCards);
-    } else {
-      const shuffledCards = createShuffledCards(JSON.parse(getWordsFromStorage));
-      setCards(shuffledCards);
-    }
-    toast("Complete!");
+    shuffleCards(initialWords);
   }
   
   // handle download Excel file
@@ -156,23 +121,16 @@ function App() {
             variant='contained'
             color='secondary'
             onClick={handleDownloadExcel}
-            
           >
             Excel 양식 다운로드
           </Button>
         </Tooltip>
-
-        {/* <Tooltip title="aaaaa">
-          <div className={styles.HelpIconContainer}>
-            <HelpOutlineIcon />
-          </div>
-        </Tooltip> */}
       </div>
 
       {/* Cards Component */}
       <div className={styles.container}>
         <div className={styles.CardContainer}>
-          <FlipCard cards={cards} setCards={setCards}/>
+          <FlipCard />
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import styled from "styled-components";
 import Popup from "./Popup";
+import useStore from "../store/useStore";
 
 const GridContainer = styled.div`
     display: grid;
@@ -31,9 +32,9 @@ const createShuffledCards = (words) => {
     return allCards;
 };
 
-const FlipCard = ({
-    cards, setCards
-}) => {
+const FlipCard = () => {
+    const { cards, setCards } = useStore();
+
     const [flipped, setFlipped] = useState([]);
     const [matched, setMatched] = useState([]);
     const [gameEnded, setGameEnded] = useState(false);
