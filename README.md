@@ -26,4 +26,5 @@ https://flipword-beta.netlify.app/
 - 카드 셔플 기능 추가 개발 완료
 - Excel파일 단어등록 기능 추가 개발 완료
 
-
+2024.5.27 기록
+- 상태관리 관련 부분 개선 작업 진행 중(useState => zustand)
