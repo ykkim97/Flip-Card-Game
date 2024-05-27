@@ -77,7 +77,6 @@ const FlipCard = () => {
     useEffect(() => {
         const matchedIds = matched.map(id => id.split('_')[0]);
         if (matchedIds.length === initialWords.length * 2) {
-            // setFlipped([]);
             setGameEnded(true);
         }
     }, [matched, initialWords.length]);
@@ -90,6 +89,7 @@ const FlipCard = () => {
                         key={card.id}
                         card={card}
                         isFlipped={flipped.includes(card.id) || matched.includes(card.id)}
+                        isMatched={matched.includes(card.id)}
                         onClick={() => handleCardClick(card.id)}
                     />
                 ))}

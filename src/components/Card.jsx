@@ -41,7 +41,8 @@ const CardFace = styled.div`
 `;
 
 const CardFront = styled(CardFace)`
-    background-color: #ffcc00;
+    // background-color: #ffcc00;
+    background-color: ${({ isMatched }) => (isMatched ? '#2bc71d' : '#ffcc00')};
     font-size: 17px;
     transform: rotateY(180deg);
 `;
@@ -52,12 +53,12 @@ const CardBack = styled(CardFace)`
     color: white;
 `;
 
-const Card = ({ card, isFlipped, onClick }) => {
+const Card = ({ card, isFlipped, onClick, isMatched }) => {
 
     return (
         <CardContainer onClick={onClick}>
             <CardInner isFlipped={isFlipped}>
-                <CardFront>
+                <CardFront isMatched={isMatched}>
                     {card.text}
                 </CardFront>
                 <CardBack>
