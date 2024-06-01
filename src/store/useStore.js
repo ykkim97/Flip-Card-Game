@@ -38,7 +38,7 @@ const useStore = create((set) => ({
             set({ cards: createShuffledCards(combinedWords), showModal: false });
             toast("단어가 추가되었습니다.");
         } else {
-            alert("8세트를 입력해주세요.");
+            toast("8세트를 입력해주세요.");
         }
     },
 
