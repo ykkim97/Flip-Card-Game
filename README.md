@@ -1,6 +1,8 @@
 
 # 영단어 카드짝 맞추기 게임 만들기
-![image](https://github.com/ykkim97/Flip-Card-Game/assets/17917009/0a2a86d0-d198-4790-8a20-db01f751c6a9)
+
+![image](https://github.com/ykkim97/Flip-Card-Game/assets/17917009/42db4758-e266-4971-a76e-ecf2e447ff69)
+
 ## 소개
 1. 영어단어와 그 단어의 의미를 가진 한국어의 짝을 맞추어 카드를 모두 뒤집으면 클리어 하는 간단한 게임
 2. 현재는 8세트를 기준으로 카드를 생성할 수 있다.
